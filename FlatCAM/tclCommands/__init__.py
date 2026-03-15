@@ -1,5 +1,8 @@
+# import importlib
 import pkgutil
 import sys
+from pathlib import Path
+import importlib.util
 
 # allowed command modules (please append them alphabetically ordered)
 import tclCommands.TclCommandAddCircle
@@ -71,9 +74,17 @@ import tclCommands.TclCommandWriteGCode
 
 __all__ = []
 
-for loader, name, is_pkg in pkgutil.walk_packages(__path__):
-	module = loader.find_module(name).load_module(name)
-	__all__.append(name)
+for loader, module_name, is_pkg in pkgutil.walk_packages(__path__):
+    if getattr(sys, 'frozen', False):
+        spec = loader.find_spec(module_name)
+    else:
+        module_path = Path(loader.path) / (module_name + ".py")
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    __all__.append(module_name)
 
 
 def register_all_commands(app, commands):

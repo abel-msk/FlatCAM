@@ -14,23 +14,23 @@ import numpy as np
 
 def apply_patches():
 	# Patch MarkersVisual to have crossed lines marker
-	cross_lines = """
-	float cross(vec2 pointcoord, float size)
-	{
-		//vbar
-		float r1 = abs(pointcoord.x - 0.5)*size;
-		float r2 = abs(pointcoord.y - 0.5)*size - $v_size/2;
-		float vbar = max(r1,r2);
-		//hbar
-		float r3 = abs(pointcoord.y - 0.5)*size;
-		float r4 = abs(pointcoord.x - 0.5)*size - $v_size/2;
-		float hbar = max(r3,r4);
-		return min(vbar, hbar);
-	}
-	"""
-
-	markers._marker_dict['++'] = cross_lines
-	markers.marker_types = tuple(sorted(list(markers._marker_dict.copy().keys())))
+	# cross_lines = """
+	# float cross(vec2 pointcoord, float size)
+	# {
+	# 	//vbar
+	# 	float r1 = abs(pointcoord.x - 0.5)*size;
+	# 	float r2 = abs(pointcoord.y - 0.5)*size - $v_size/2;
+	# 	float vbar = max(r1,r2);
+	# 	//hbar
+	# 	float r3 = abs(pointcoord.y - 0.5)*size;
+	# 	float r4 = abs(pointcoord.x - 0.5)*size - $v_size/2;
+	# 	float hbar = max(r3,r4);
+	# 	return min(vbar, hbar);
+	# }
+	# """
+	#
+	# markers._marker_dict['++'] = cross_lines
+	# markers.marker_types = tuple(sorted(list(markers._marker_dict.copy().keys())))
 
 	# # Add clear_data method to LineVisual to have possibility of clearing data
 	# def clear_data(self):

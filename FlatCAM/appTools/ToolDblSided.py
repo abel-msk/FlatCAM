@@ -4,7 +4,8 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from appTool import AppTool
 from appGUI.GUIElements import RadioSet, FCDoubleSpinner, FCButton, FCComboBox, NumericalEvalTupleEntry, FCLabel
 
-from numpy import Inf
+# from numpy import Inf
+import numpy as np
 
 from shapely.geometry import Point
 from shapely import affinity
@@ -393,10 +394,10 @@ class DblSidedTool(AppTool):
 
 	def on_bbox_coordinates(self):
 
-		xmin = Inf
-		ymin = Inf
-		xmax = -Inf
-		ymax = -Inf
+		xmin = np.inf
+		ymin = np.inf
+		xmax = -np.inf
+		ymax = -np.inf
 
 		obj_list = self.app.collection.get_selected()
 

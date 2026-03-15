@@ -4504,10 +4504,10 @@ class AppExcEditorUI:
 
 
 def get_shapely_list_bounds(geometry_list):
-	xmin = np.Inf
-	ymin = np.Inf
-	xmax = -np.Inf
-	ymax = -np.Inf
+	xmin = np.inf
+	ymin = np.inf
+	xmax = -np.inf
+	ymax = -np.inf
 
 	for gs in geometry_list:
 		try:
