@@ -201,4 +201,7 @@ This will create directory `publish/macos/dist/` and
 - FlatCAM.app MacOS application. Can be cpyed in `/Application` directory
 - FlatCAM.dmg  MacOS distribution package (doing tha same)
 
+##  Package
 
+DMG package with last release available here: 
+https://drive.google.com/file/d/1jUyTmGAGWDvM8SKw_6OQL4h_e8yZb8xI/view
