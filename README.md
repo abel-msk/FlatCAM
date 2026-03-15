@@ -145,6 +145,7 @@ Kubuntu 24.04:
 sudo apt install pyqt5-dev-tools
 ```
 
+
 # Run
 
 
@@ -174,3 +175,30 @@ FlatCAM.zip --shellfile=<cmd_line_shellfile>
 FlatCAM.zip --shellvar=<1,'C:\path',23>
 FlatCAM.zip --headless
 ```
+
+
+# MacOS instructions
+Download sources from git. 
+```sh
+git clone ....
+```
+
+This will create directory FlatCam.  Go to directory and run `publish/macos/setup.sh` script.
+```sh
+cd FlatCAM
+/bin/bash ./publish/macos/build.sh
+```
+
+This script will create virtual environment,  install required libs, ang compile Qt resources.
+
+For start application run
+```sh
+source .venv/bin/activate
+python3 python3 FlatCAM/FlatCAM.py
+```
+For create native MacOS application execute `publish/macos/build.sh`
+This will create directory `publish/macos/dist/` and
+- FlatCAM.app MacOS application. Can be cpyed in `/Application` directory
+- FlatCAM.dmg  MacOS distribution package (doing tha same)
+
+

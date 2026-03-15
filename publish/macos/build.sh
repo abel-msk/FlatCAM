@@ -5,22 +5,24 @@ die() {
     exit "$exit_code" # Exit the script with the specified code
 }
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-FLATCAM_PATH="${SCRIPT_DIR%/*}"
-cd $FLATCAM_PATH || die "incorrect path $FLATCAM_PATH"
+echo "The script is running from: $SCRIPT_DIR"
+SRC="${SCRIPT_DIR%/*}"
+ROOT="${SRC%/*}"
+SRC="${ROOT}/FlatCAM"
 
-source $FLATCAM_PATH/.venv/bin/activate
+source $ROOT/.venv/bin/activate
 #pyinstaller  -F --onefile --windowed  -y  --clean --name="ReFlatCAM" --icon="$SCRIPT_DIR/resources/flatcam_icon256.icns" ./FlatCAM.py
 # help_bin = pkgutil.get_data( 'helpmod', 'help_data.txt' )
 
-pyinstaller  --windowed  --onedir  -y  --clean   --name="ReFlatCAM" \
+pyinstaller  --windowed  --onedir  -y  --clean   --name="FlatCAM" \
   --collect-all vispy  --collect-all language_data --collect-all rasterio \
-  --add-data $FLATCAM_PATH/tclCommands/*:tclCommands  \
-  --add-data $FLATCAM_PATH/translate/*:translate \
-  --add-data $FLATCAM_PATH/preprocessors/*:preprocessors \
+  --add-data $SRC/tclCommands/*:tclCommands  \
+  --add-data $SRC/translate/*:translate \
+  --add-data $SRC/preprocessors/*:preprocessors \
   --distpath "$SCRIPT_DIR/dist" \
-  --icon="$SCRIPT_DIR/resources/flatcam_icon256.icns"  "./FlatCAM.py"
+  --icon="$SRC/assets/macos/flatcam_icon256.icns"  "./FlatCAM/FlatCAM.py"
 
 #pyinstaller  -y "$SCRIPT_DIR/ReFlatCAM.spec"
 #  --collect-submodules vispy.glsl
 
-hdiutil create -volname "ReFlatCAM" -srcfolder "$SCRIPT_DIR/dist/ReFlatCAM.app" -ov -format UDZO "$SCRIPT_DIR/dist/ReFlatCAM.dmg"
+hdiutil create -volname "FlatCAM" -srcfolder "$SCRIPT_DIR/dist/FlatCAM.app" -ov -format UDZO "$SCRIPT_DIR/dist/FlatCAM.dmg"
